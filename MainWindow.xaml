@@ -4,13 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Luxio.ColorCat"
-        mc:Ignorable="d" Title="ColorCat" Height="150.672" Width="143.476"
+        mc:Ignorable="d" Title="ColorCat" Height="194" Width="143.476"
         ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Window.DataContext>
         <local:MainWndModel />
     </Window.DataContext>
     <Grid Margin="5">
         <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
             <RowDefinition />
             <RowDefinition />
             <RowDefinition />
@@ -93,8 +95,22 @@
 
         <Button
             Grid.Row="4" Grid.ColumnSpan="3" Margin="1"
-            Content="_Copy HTML Color"
-            Command="{Binding CopyCommand}"
+            Content="Copy _HTML Color"
+            Command="{Binding CopyHtmlCommand}"
+        />
+
+        <TextBox
+            Grid.Row="5" Grid.ColumnSpan="3" Margin="1"
+            TextAlignment="Center" IsReadOnly="True"
+            GotFocus="OnTextBoxGotFocus"
+            PreviewMouseUp="OnTextBoxGotFocus"
+            Text="{Binding Win32MacroColor, Mode=OneWay}"
+        />
+
+        <Button
+            Grid.Row="6" Grid.ColumnSpan="3" Margin="1"
+            Content="Copy _Win32 Macro"
+            Command="{Binding CopyWin32MacroCommand}"
         />
     </Grid>
 </Window>

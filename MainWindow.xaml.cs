@@ -37,6 +37,14 @@ namespace Luxio.ColorCat
     /// </summary>
     class MainWndModel : INotifyPropertyChanged
     {
+        #region CommandTypes
+        public enum CopyCommandType
+        {
+            Html,
+            Win32ColorMacro,
+        }
+        #endregion
+
         #region Properties
         private byte[] ColorBytes = new byte[3];
 
@@ -52,6 +60,7 @@ namespace Luxio.ColorCat
 
                     var color = Color.FromRgb(Red, Green, Blue);
                     UpdateHtmlColor(color);
+                    UpdateWin32MacroColor(ScreenColor);
                     UpdateBrushColor(color);
                 }
             }
@@ -69,6 +78,7 @@ namespace Luxio.ColorCat
 
                     var color = Color.FromRgb(Red, Green, Blue);
                     UpdateHtmlColor(color);
+                    UpdateWin32MacroColor(ScreenColor);
                     UpdateBrushColor(color);
                 }
             }
@@ -86,6 +96,7 @@ namespace Luxio.ColorCat
 
                     var color = Color.FromRgb(Red, Green, Blue);
                     UpdateHtmlColor(color);
+                    UpdateWin32MacroColor(ScreenColor);
                     UpdateBrushColor(color);
                 }
             }
@@ -103,6 +114,7 @@ namespace Luxio.ColorCat
 
                     UpdateRgbColor(ScreenColor);
                     UpdateHtmlColor(ScreenColor);
+                    UpdateWin32MacroColor(ScreenColor);
                     UpdateBrushColor(ScreenColor);
                 }
             }
@@ -113,6 +125,12 @@ namespace Luxio.ColorCat
             get;
             private set;
         } = "#000000";
+
+        public string Win32MacroColor
+        {
+            get;
+            private set;
+        } = "RGB(0, 0, 0)";
 
         public Brush BrushColor
         {
@@ -138,6 +156,12 @@ namespace Luxio.ColorCat
             RaisePropertyChanged(nameof(HtmlColor));
         }
 
+        protected void UpdateWin32MacroColor(Color color)
+        {
+            Win32MacroColor = string.Format("RGB({0}, {1}, {2})", color.R, color.G, color.B);
+            RaisePropertyChanged(nameof(Win32MacroColor));
+        }
+
         protected void UpdateBrushColor(Color color)
         {
             BrushColor = new SolidColorBrush(Color.FromRgb(color.R, color.G, color.B));
@@ -146,14 +170,26 @@ namespace Luxio.ColorCat
         #endregion
 
         #region Commands
-        private RelayCommand _CopyCommand;
-        public ICommand CopyCommand
+        private RelayCommand _CopyHtmlCommand;
+        public ICommand CopyHtmlCommand
         {
             get
             {
-                return _CopyCommand ?? (_CopyCommand = new RelayCommand(p =>
+                return _CopyHtmlCommand ?? (_CopyHtmlCommand = new RelayCommand(p =>
                 {
                     Clipboard.SetText(HtmlColor);
+                }));
+            }
+        }
+
+        private RelayCommand _CopyWin32MacroCommand;
+        public ICommand CopyWin32MacroCommand
+        {
+            get
+            {
+                return _CopyWin32MacroCommand ?? (_CopyWin32MacroCommand = new RelayCommand(p =>
+                {
+                    Clipboard.SetText(Win32MacroColor);
                 }));
             }
         }
