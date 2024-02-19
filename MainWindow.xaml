@@ -4,8 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Luxio.ColorCat"
-        mc:Ignorable="d" Title="ColorCat" Height="194" Width="143.476"
-        ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+        mc:Ignorable="d" Title="ColorCat" Height="255" Width="186"
+        ResizeMode="NoResize" WindowStartupLocation="CenterScreen"
+        FontSize="16">
     <Window.DataContext>
         <local:MainWndModel />
     </Window.DataContext>
@@ -34,6 +35,7 @@
                 <Setter Property="Grid.Column" Value="1" />
                 <Setter Property="Margin" Value="3, 1, 1, 1" />
                 <Setter Property="MaxLength" Value="3" />
+                <Setter Property="TextAlignment" Value="Right" />
             </Style>
         </Grid.Resources>
 

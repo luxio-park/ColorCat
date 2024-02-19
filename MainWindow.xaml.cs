@@ -37,14 +37,6 @@ namespace Luxio.ColorCat
     /// </summary>
     class MainWndModel : INotifyPropertyChanged
     {
-        #region CommandTypes
-        public enum CopyCommandType
-        {
-            Html,
-            Win32ColorMacro,
-        }
-        #endregion
-
         #region Properties
         private byte[] ColorBytes = new byte[3];
 
